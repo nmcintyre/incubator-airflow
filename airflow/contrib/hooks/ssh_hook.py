@@ -185,6 +185,8 @@ class SSHHook(BaseHook, LoggingMixin):
                    "-o", "ControlMaster=no",
                    "-o", "UserKnownHostsFile=/dev/null",
                    "-o", "StrictHostKeyChecking=no"]
+        if self.key_file is not None:
+            ssh_cmd.extend(["-i", self.key_file])
 
         ssh_tunnel_cmd = ["-L", tunnel_host,
                           "echo -n ready && cat"
